@@ -15,12 +15,32 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="map.hpp">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
+    <ClInclude Include="vecteur.hpp">
+      <Filter>Fichiers sources</Filter>
+    </ClInclude>
     <ClInclude Include="pieces.h">
+      <Filter>Fichiers d%27en-tête</Filter>
+    </ClInclude>
+    <ClInclude Include="camouflage.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <Text Include="mapExpert25.txt">
+      <Filter>Fichiers sources</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
     <ClCompile Include="pieces.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="camouflage.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>

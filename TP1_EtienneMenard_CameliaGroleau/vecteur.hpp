@@ -3,7 +3,7 @@
  * Date:		02/09/2020
  * Fichier:		vecteur.h
  * Description:	Déclare les méthodes de l'objet vecteur
-*/
+ */
 #pragma once
 #include <iostream>
 #include <cassert>

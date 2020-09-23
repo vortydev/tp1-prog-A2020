@@ -18,6 +18,20 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="camouflage.h" />
+    <ClInclude Include="map.hpp" />
+    <ClInclude Include="pieces.h" />
+    <ClInclude Include="vecteur.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="mapExpert25.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="camouflage.cpp" />
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="pieces.cpp" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <ProjectGuid>{4AC074AB-A504-4583-A09A-462C424FA8F9}</ProjectGuid>
@@ -137,12 +151,6 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClInclude Include="pieces.h" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="pieces.cpp" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>
