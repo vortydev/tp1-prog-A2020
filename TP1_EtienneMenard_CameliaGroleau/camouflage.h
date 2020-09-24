@@ -29,4 +29,7 @@ class camouflage
 		void removePiece(int indexPiece, int indLine, int indCol);	//retire la pièce dans la solution à l’index
 
 		void readFile();
+
+		bool solutionRecursive(int nbPiece = 0);
+		bool pieceBienPlacee(int pieceAnalysee, int ligne, int col);
 };
