@@ -59,7 +59,13 @@ bool camouflage::verifPiece(int pieceAnalysee, int ligne, int col)
 
 void camouflage::putPiece(int indexPiece, int indLine, int indCol)
 {
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
 
+        }
+    }
 }
 
 void camouflage::removePiece(int indexPiece, int indLine, int indCol)
