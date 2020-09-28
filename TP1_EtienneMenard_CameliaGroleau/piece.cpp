@@ -1,4 +1,4 @@
-#include "pieces.h"
+#include "piece.h"
 
 piece::piece(char nomPiece, char hautGauche, char hautDroite, char basGauche, char basDroite)
 {
@@ -22,6 +22,11 @@ piece::~piece()
 			_partiesPiece[i][j]._vide = false;
 			_partiesPiece[i][j]._valeurPiece = '\0';
 		}
+}
+
+char piece::name()
+{
+	return _nomPiece;
 }
 
 casePiece piece::at(int x, int y)

@@ -11,7 +11,7 @@
 #include <fstream>
 #include "vecteur.hpp"
 #include "map.hpp"
-#include "pieces.h"
+#include "piece.h"
 using namespace std;
 
 class camouflage
@@ -19,12 +19,12 @@ class camouflage
 	private:
 		map<char> _mapPlanche;
 		map<char[2]> _mapSolution;
-		// vecteur<pieces> pieces;
+		vecteur<piece> _pieces;
 
 	public:
 		void init();												// initialise les composants du jeu
 		bool findSolution(int indexPiece = 0);						//le brut force récursif
-		bool verifPiece(int pieceAnalysee, int ligne, int col);		//vérifie si la position de la pièce peut correspondre
+		bool verifPiece(int indexPiece, int ligne, int col);		//vérifie si la position de la pièce peut correspondre
 
 		void putPiece(int indexPiece, int indLine, int indCol);		//place la pièce dans la solution à l’index 
 																	//line et col reçu
