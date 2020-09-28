@@ -1,5 +1,5 @@
 /*
- * Auteur:		Étienne Ménard
+ * Auteur.e.s:	Étienne Ménard et Camélia Groleau
  * Date:		23/09/2020
  * Fichier:		camouflage.h
  * Description:	Déclare les méthodes qui run le jeu Camouflage
@@ -30,6 +30,6 @@ class camouflage
 																	//line et col reçu
 		void removePiece(int indexPiece, int indLine, int indCol);	//retire la pièce dans la solution à l’index
 
-		void readFile();
-
+		void readFile();											// lis du fichier entré pour loader la mapPlanche
+		void printFile();											// print dans un fichier la mapPlanche et la mapSolution
 };

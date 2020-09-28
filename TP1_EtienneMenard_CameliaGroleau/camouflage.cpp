@@ -124,3 +124,12 @@ void camouflage::readFile() {
     cout << "Contenu de la planche de solution:" << endl << _mapSolution << endl;
 }
 
+void camouflage::printFile() {
+    string solutionFileName = _mapPlanche.getName();
+    ofstream solutionFile("solution" + solutionFileName + ".txt");
+
+    solutionFile << "Pour la map suivante:" << endl;
+    solutionFile << _mapPlanche << endl;
+    solutionFile << "Une solution a été trouvee:" << endl;
+    solutionFile << _Syserror_map << endl;
+}
