@@ -8,6 +8,65 @@
 #include "camouflage.h"
 
 //fonction d'ouverture du ficher contenant la matrice
+
+void camouflage::init() {
+    readFile();
+}
+
+bool camouflage::findSolution(int indexPiece)
+{
+    if (indexPiece == 6)
+        return true;
+    for (int ligne = 0; ligne < 3; ligne++)
+    {
+        for (int col = 0; col < 3; col++)
+        {
+            for (int rotation = 0; rotation < 4; rotation++)
+            {
+                if (verifPiece(indexPiece, ligne, col))
+                {
+                    indexPiece++;
+                    if (findSolution(indexPiece))
+                    {
+                        return true;
+                    }
+                    removePiece(indexPiece, ligne, col);
+                }
+            }
+        }
+    }
+    return false;
+}
+
+bool camouflage::verifPiece(int pieceAnalysee, int ligne, int col)
+{
+    for (int xPos = 0; xPos < 2; xPos++)
+    {
+        for (int yPos = 0; yPos < 2; yPos++)
+        {
+            if (!pieces[pieceAnalysee].emptyAt(xPos, yPos))
+            {
+                if ((((pieces[pieceAnalysee].valueAt(xPos, yPos) == 'O') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'B')) || ((pieces[pieceAnalysee].valueAt(xPos, yPos) == 'P') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'E'))) && (_mapSolution.at(ligne + xPos, col + yPos) != '\0'))
+                {
+                    return false;
+                }
+            }
+        }
+    }
+    putPiece(pieceAnalysee, ligne, col);
+    return true;
+}
+
+void camouflage::putPiece(int indexPiece, int indLine, int indCol)
+{
+
+}
+
+void camouflage::removePiece(int indexPiece, int indLine, int indCol)
+{
+
+}
+
 void camouflage::readFile() {
     string userInput;
     string plancheFileName;
@@ -59,51 +118,3 @@ void camouflage::readFile() {
     cout << "Contenu de la planche de solution:" << endl << _mapSolution << endl;
 }
 
-void camouflage::init() {
-    readFile();
-}
-
-
-bool camouflage::findSolution(int indexPiece)
-{
-    if (indexPiece == 6)
-        return true;
-    for (int ligne = 0; ligne < 3; ligne++)
-    {
-        for (int col = 0; col < 3; col++)
-        {
-            for (int rotation = 0; rotation < 4; rotation++)
-            {
-                if (pieceBienPlacee(indexPiece, ligne, col))
-                {
-                    indexPiece++;
-                    if (solutionRecursive(indexPiece))
-                    {
-                        return true;
-                    }
-                    removePiece(indexPiece, ligne, col);
-                }
-            }
-        }
-    }
-    return false;
-}
-
-bool camouflage::pieceBienPlacee(int pieceAnalysee, int ligne, int col)
-{
-    for (int xPos = 0; xPos < 2; xPos++)
-    {
-        for (int yPos = 0; yPos < 2; yPos++)
-        {
-            if (!pieces[pieceAnalysee].emptyAt(xPos, yPos))
-            {
-                if ((((pieces[pieceAnalysee].valueAt(xPos, yPos) == 'O') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'B')) || ((pieces[pieceAnalysee].valueAt(xPos, yPos) == 'P') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'E'))) && (_mapSolution.at(ligne + xPos, col + yPos) != '\0'))
-                {
-                    return false;
-                }
-            }
-        }
-    }
-    putPiece(pieceAnalysee, ligne, col);
-    return true;
-}
