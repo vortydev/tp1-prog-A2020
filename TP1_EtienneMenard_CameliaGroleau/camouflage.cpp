@@ -11,6 +11,7 @@
 
 void camouflage::init() {
     readFile();
+    
 }
 
 bool camouflage::findSolution(int indexPiece)
@@ -46,7 +47,7 @@ bool camouflage::verifPiece(int indexPiece, int ligne, int col)
         {
             if (!_pieces[indexPiece].emptyAt(xPos, yPos))
             {
-                if ((((_pieces[indexPiece].valueAt(xPos, yPos) == 'O') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'B')) || ((_pieces[indexPiece].valueAt(xPos, yPos) == 'P') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'E'))) && (_mapSolution.at(ligne + xPos, col + yPos) != '\0'))
+                if ((((_pieces[indexPiece].valueAt(xPos, yPos) == 'O') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'B')) || ((_pieces[indexPiece].valueAt(xPos, yPos) == 'P') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'E'))) && (_mapSolution.at(ligne + xPos, col + yPos)[0] != '\0'))
                 {
                     return false;
                 }
