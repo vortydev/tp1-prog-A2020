@@ -30,6 +30,5 @@ class camouflage
 
 		void readFile();
 
-		bool solutionRecursive(int nbPiece = 0);
 		bool pieceBienPlacee(int pieceAnalysee, int ligne, int col);
 };

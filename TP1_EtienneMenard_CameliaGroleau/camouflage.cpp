@@ -64,9 +64,9 @@ void camouflage::init() {
 }
 
 
-bool camouflage::solutionRecursive(int nbPiece)
+bool camouflage::findSolution(int indexPiece)
 {
-    if (nbPiece == 6)
+    if (indexPiece == 6)
         return true;
     for (int ligne = 0; ligne < 3; ligne++)
     {
@@ -74,14 +74,14 @@ bool camouflage::solutionRecursive(int nbPiece)
         {
             for (int rotation = 0; rotation < 4; rotation++)
             {
-                if (pieceBienPlacee(nbPiece, ligne, col))
+                if (pieceBienPlacee(indexPiece, ligne, col))
                 {
-                    nbPiece++;
-                    if (solutionRecursive(nbPiece))
+                    indexPiece++;
+                    if (solutionRecursive(indexPiece))
                     {
                         return true;
                     }
-                    removePiece(nbPiece, ligne, col);
+                    removePiece(indexPiece, ligne, col);
                 }
             }
         }
