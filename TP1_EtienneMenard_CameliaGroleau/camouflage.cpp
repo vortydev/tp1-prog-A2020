@@ -11,7 +11,12 @@
 
 void camouflage::init() {
     readFile();
-    
+    _pieces[0] = piece('U', ' ', 'P', 'O', '\0');
+    _pieces[1] = piece('V', 'P', ' ', 'O', '\0');
+    _pieces[2] = piece('W', ' ', 'O', 'P', '\0');
+    _pieces[3] = piece('X', 'P', 'P', '\0', '\0');
+    _pieces[4] = piece('Y', 'P', 'O', '\0', '\0');
+    _pieces[5] = piece('Z', ' ', '\0', 'O', ' ');
 }
 
 bool camouflage::findSolution(int indexPiece)
