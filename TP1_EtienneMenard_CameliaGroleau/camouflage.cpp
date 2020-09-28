@@ -38,22 +38,22 @@ bool camouflage::findSolution(int indexPiece)
     return false;
 }
 
-bool camouflage::verifPiece(int pieceAnalysee, int ligne, int col)
+bool camouflage::verifPiece(int indexPiece, int ligne, int col)
 {
     for (int xPos = 0; xPos < 2; xPos++)
     {
         for (int yPos = 0; yPos < 2; yPos++)
         {
-            if (!pieces[pieceAnalysee].emptyAt(xPos, yPos))
+            if (!_pieces[indexPiece].emptyAt(xPos, yPos))
             {
-                if ((((pieces[pieceAnalysee].valueAt(xPos, yPos) == 'O') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'B')) || ((pieces[pieceAnalysee].valueAt(xPos, yPos) == 'P') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'E'))) && (_mapSolution.at(ligne + xPos, col + yPos) != '\0'))
+                if ((((_pieces[indexPiece].valueAt(xPos, yPos) == 'O') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'B')) || ((_pieces[indexPiece].valueAt(xPos, yPos) == 'P') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'E'))) && (_mapSolution.at(ligne + xPos, col + yPos) != '\0'))
                 {
                     return false;
                 }
             }
         }
     }
-    putPiece(pieceAnalysee, ligne, col);
+    putPiece(indexPiece, ligne, col);
     return true;
 }
 
@@ -63,13 +63,22 @@ void camouflage::putPiece(int indexPiece, int indLine, int indCol)
     {
         for (int j = 0; j < 2; j++)
         {
-
+            _mapSolution[i + indLine][j + indCol][0] = _pieces[indexPiece].name();
+            _mapSolution[i + indLine][j + indCol][1] = _pieces[indexPiece].valueAt(i, j);
         }
     }
 }
 
 void camouflage::removePiece(int indexPiece, int indLine, int indCol)
 {
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 2; j++)
+        {
+            for (int pos = 0; pos < 2; pos++)
+                _mapSolution[i + indLine][j + indCol][pos] = '\0';
+        }
+    }
 
 }
 

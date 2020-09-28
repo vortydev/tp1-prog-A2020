@@ -21,10 +21,10 @@
     <ClInclude Include="vecteur.hpp">
       <Filter>Fichiers sources</Filter>
     </ClInclude>
-    <ClInclude Include="pieces.h">
+    <ClInclude Include="camouflage.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
-    <ClInclude Include="camouflage.h">
+    <ClInclude Include="piece.h">
       <Filter>Fichiers d%27en-tête</Filter>
     </ClInclude>
   </ItemGroup>
@@ -34,13 +34,13 @@
     </Text>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="pieces.cpp">
-      <Filter>Fichiers sources</Filter>
-    </ClCompile>
     <ClCompile Include="camouflage.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
     <ClCompile Include="main.cpp">
+      <Filter>Fichiers sources</Filter>
+    </ClCompile>
+    <ClCompile Include="piece.cpp">
       <Filter>Fichiers sources</Filter>
     </ClCompile>
   </ItemGroup>
