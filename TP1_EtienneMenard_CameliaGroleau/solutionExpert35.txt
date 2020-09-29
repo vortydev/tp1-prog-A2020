@@ -1,12 +1,12 @@
 Pour la map suivante:
-B B B B 
+E E B B 
 B E E B 
 B E E B 
-B E B E 
+E E E E 
 
 Une solution a été trouvee:
-UO U  Z  ZO 
-WO UP XP Z  
-W  WP XP VO 
-YO YP V  VP 
+Z  YP YO UO 
+ZO Z  UP U  
+WO XP XP VO 
+W  WP V  VP 
 

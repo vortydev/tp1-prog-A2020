@@ -162,7 +162,7 @@ int map<TYPE>::nbCol()const {
 template <class TYPE>
 const char* map<TYPE>::getName()const {
 	if (_name == nullptr) 
-		return '\0';
+		return "\0";
 	return _name;
 }
 

@@ -1,5 +1,16 @@
 #include "piece.h"
 
+piece::piece()
+{
+	_nomPiece = '\0';
+	for (int i = 0; i < 2; i++)
+		for (int j = 0; j < 2; j++)
+		{
+			_partiesPiece[i][j]._vide = true;
+			_partiesPiece[i][j]._valeurPiece = '\0';
+		}
+}
+
 piece::piece(char nomPiece, char hautGauche, char hautDroite, char basGauche, char basDroite)
 {
 	_nomPiece = nomPiece;

@@ -18,7 +18,7 @@ class camouflage
 {
 	private:
 		map<char> _mapPlanche;
-		map<char[2]> _mapSolution;
+		map<string> _mapSolution;
 		vecteur<piece> _pieces = vecteur<piece>(6);
 
 	public:

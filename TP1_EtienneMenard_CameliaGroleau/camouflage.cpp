@@ -17,6 +17,11 @@ void camouflage::init() {
     _pieces[3] = piece('X', 'P', 'P', '\0', '\0');
     _pieces[4] = piece('Y', 'P', 'O', '\0', '\0');
     _pieces[5] = piece('Z', ' ', '\0', 'O', ' ');
+    for (int i = 0; i < 4; i++)
+        for (int j = 0; j < 4; j++)
+            _mapSolution.at(i, j) = "\0";
+    findSolution();
+    printFile();
 }
 
 bool camouflage::findSolution(int indexPiece)
@@ -31,13 +36,15 @@ bool camouflage::findSolution(int indexPiece)
             {
                 if (verifPiece(indexPiece, ligne, col))
                 {
-                    indexPiece++;
-                    if (findSolution(indexPiece))
+                    cout << "Piece " << indexPiece << " ajoutee\n" << _mapSolution;
+                    if (findSolution(indexPiece + 1))
                     {
                         return true;
                     }
                     removePiece(indexPiece, ligne, col);
+                    cout << "Piece " << indexPiece << " retiree\n" << _mapSolution;
                 }
+                _pieces[indexPiece].rotateClockwise();
             }
         }
     }
@@ -52,10 +59,12 @@ bool camouflage::verifPiece(int indexPiece, int ligne, int col)
         {
             if (!_pieces[indexPiece].emptyAt(xPos, yPos))
             {
-                if ((((_pieces[indexPiece].valueAt(xPos, yPos) == 'O') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'B')) || ((_pieces[indexPiece].valueAt(xPos, yPos) == 'P') && (_mapPlanche.at(ligne + xPos, col + yPos) != 'E'))) && (_mapSolution.at(ligne + xPos, col + yPos)[0] != '\0'))
-                {
-                    return false;
-                }
+                if ((_pieces[indexPiece].valueAt(xPos, yPos) == 'O' && _mapPlanche.at(ligne + xPos, col + yPos) != 'B') ||
+                    (_pieces[indexPiece].valueAt(xPos, yPos) == 'P' && _mapPlanche.at(ligne + xPos, col + yPos) != 'E') ||
+                    (_mapSolution.at(ligne + xPos, col + yPos) != "\0"))
+                        {
+                            return false;
+                        }
             }
         }
     }
@@ -69,8 +78,11 @@ void camouflage::putPiece(int indexPiece, int indLine, int indCol)
     {
         for (int j = 0; j < 2; j++)
         {
-            _mapSolution[i + indLine][j + indCol][0] = _pieces[indexPiece].name();
-            _mapSolution[i + indLine][j + indCol][1] = _pieces[indexPiece].valueAt(i, j);
+            if (!_pieces[indexPiece].emptyAt(i, j))
+            {
+                _mapSolution[i + indLine][j + indCol] = _pieces[indexPiece].name();
+                _mapSolution[i + indLine][j + indCol] += _pieces[indexPiece].valueAt(i, j);
+            }
         }
     }
 }
@@ -81,8 +93,8 @@ void camouflage::removePiece(int indexPiece, int indLine, int indCol)
     {
         for (int j = 0; j < 2; j++)
         {
-            for (int pos = 0; pos < 2; pos++)
-                _mapSolution[i + indLine][j + indCol][pos] = '\0';
+            if(!_pieces[indexPiece].emptyAt(i, j))
+                _mapSolution.at(i + indLine, j + indCol) = "\0";
         }
     }
 
@@ -114,7 +126,7 @@ void camouflage::readFile() {
         _mapPlanche.setName(userInput.c_str());
         plancheFile >> nbLine >> nbCol;
         _mapPlanche.resize(nbLine, nbCol);
-        plancheFile >> _mapPlanche; //lecture de la matrice
+        plancheFile >>_mapPlanche; //lecture de la matrice
         plancheFile.close();
     }
     else
@@ -126,10 +138,6 @@ void camouflage::readFile() {
 
         _mapSolution.setName(solutionFileName.c_str());
         _mapSolution.resize(nbLine, nbCol);
-        /*for (int i = 0; i < 7; i++) {
-            getline(solutionFile, line);
-        }*/
-        solutionFile >> _mapPlanche; //lecture de la matrice
         solutionFile.close();
     }
     else
@@ -146,5 +154,5 @@ void camouflage::printFile() {
     solutionFile << "Pour la map suivante:" << endl;
     solutionFile << _mapPlanche << endl;
     solutionFile << "Une solution a été trouvee:" << endl;
-    solutionFile << _Syserror_map << endl;
+    solutionFile << _mapSolution << endl;
 }

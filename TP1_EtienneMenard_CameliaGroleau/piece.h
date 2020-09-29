@@ -12,6 +12,7 @@ private:
 	casePiece _partiesPiece[2][2];
 	char _nomPiece;
 public:
+	piece();
 	piece(char nomPiece, char hautGauche, char hautDroite, char basGauche, char basDroite);
 	~piece();
 
