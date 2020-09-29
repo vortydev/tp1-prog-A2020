@@ -38,13 +38,11 @@ bool camouflage::findSolution(int indexPiece)
                 {
                     if (verifPiece(indexPiece, ligne, col))
                     {
-                        cout << "Piece " << indexPiece << " ajoutee\n" << _mapSolution;
                         if (findSolution(indexPiece + 1))
                         {
                             return true;
                         }
                         removePiece(indexPiece, ligne, col);
-                        cout << "Piece " << indexPiece << " retiree\n" << _mapSolution;
                     }
                     _pieces[indexPiece].rotateClockwise();
                 }
@@ -61,13 +59,11 @@ bool camouflage::findSolution(int indexPiece)
                 {
                     if (verifPiece(indexPiece, ligne, col))
                     {
-                        cout << "Piece " << indexPiece << " ajoutee\n" << _mapSolution;
                         if (findSolution(indexPiece + 1))
                         {
                             return true;
                         }
                         removePiece(indexPiece, ligne, col);
-                        cout << "Piece " << indexPiece << " retiree\n" << _mapSolution;
                     }
                 }
             }
