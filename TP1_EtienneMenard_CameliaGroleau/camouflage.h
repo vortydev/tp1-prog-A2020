@@ -23,6 +23,8 @@ class camouflage
 
 	public:
 		void init();												//initialise les composants du jeu
+		void initPieces();											// initialise les pièces
+		void game();												// core methods du jeu
 		bool findSolution(int indexPiece = 0);						//le brut force récursif
 		bool verifPiece(int indexPiece, int ligne, int col);		//vérifie si la position de la pièce peut correspondre
 
@@ -32,4 +34,5 @@ class camouflage
 
 		void readFile();											// lis du fichier entré pour loader la mapPlanche
 		void printFile();											// print dans un fichier la mapPlanche et la mapSolution
+		void printScreen();											// print sur l'écran la mapPlanche et la mapSolution
 };

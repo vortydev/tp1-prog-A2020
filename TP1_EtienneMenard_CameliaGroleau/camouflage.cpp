@@ -1,5 +1,5 @@
 /*
- * Auteur:		Étienne Ménard
+ * Auteur:		Étienne Ménard et Camelia Groleau
  * Date:		23/09/2020
  * Fichier:		camouflage.cpp
  * Description:	Déclare les méthodes qui run le jeu Camouflage
@@ -7,36 +7,43 @@
 
 #include "camouflage.h"
 
-//fonction d'ouverture du ficher contenant la matrice
-
-void camouflage::init() {
+// initialise les composants du jeu
+void camouflage::init() {   
     readFile();
+    initPieces();
+}
+
+// initialise les pièces
+void camouflage::initPieces() {
     _pieces[0] = piece('U', ' ', 'P', 'O', '\0');
     _pieces[1] = piece('V', 'P', ' ', 'O', '\0');
     _pieces[2] = piece('W', ' ', 'O', 'P', '\0');
     _pieces[3] = piece('X', 'P', 'P', '\0', '\0');
     _pieces[4] = piece('Y', 'P', 'O', '\0', '\0');
     _pieces[5] = piece('Z', ' ', '\0', 'O', ' ');
-    for (int i = 0; i < 4; i++)
-        for (int j = 0; j < 4; j++)
-            _mapSolution.at(i, j) = "\0";
-    findSolution();
-    printFile();
 }
 
+// core loop de l'exécution du jeu
+void camouflage::game() {
+    findSolution();
+    printFile();
+    printScreen();
+}
+
+// brute force la solution du puzzle
 bool camouflage::findSolution(int indexPiece)
 {
     if (indexPiece == 6)
         return true;
     if (indexPiece != 3 && indexPiece != 4)
     {
-        for (int ligne = 0; ligne < 3; ligne++)
+        for (int ligne = 0; ligne < 3; ligne++)                     // à chaque ligne
         {
-            for (int col = 0; col < 3; col++)
+            for (int col = 0; col < 3; col++)                       // et chaque colonne
             {
-                for (int rotation = 0; rotation < 4; rotation++)
+                for (int rotation = 0; rotation < 4; rotation++)    // pour chaque rotation de 90 degré
                 {
-                    if (verifPiece(indexPiece, ligne, col))
+                    if (verifPiece(indexPiece, ligne, col))         // vérifies la pièce
                     {
                         if (findSolution(indexPiece + 1))
                         {
@@ -73,6 +80,7 @@ bool camouflage::findSolution(int indexPiece)
     return false;
 }
 
+// vérifies la pièce
 bool camouflage::verifPiece(int indexPiece, int ligne, int col)
 {
     for (int xPos = (ligne == -1) ? 1 : 0; xPos < 2; xPos++)
@@ -94,6 +102,7 @@ bool camouflage::verifPiece(int indexPiece, int ligne, int col)
     return true;
 }
 
+// place la pièce
 void camouflage::putPiece(int indexPiece, int indLine, int indCol)
 {
     for (int i = 0; i < 2; i++)
@@ -109,6 +118,7 @@ void camouflage::putPiece(int indexPiece, int indLine, int indCol)
     }
 }
 
+// enlève la pièce
 void camouflage::removePiece(int indexPiece, int indLine, int indCol)
 {
     for (int i = 0; i < 2; i++)
@@ -122,6 +132,7 @@ void camouflage::removePiece(int indexPiece, int indLine, int indCol)
 
 }
 
+//fonction d'ouverture du ficher contenant la matrice
 void camouflage::readFile() {
     string userInput;
     string plancheFileName;
@@ -129,7 +140,7 @@ void camouflage::readFile() {
     bool isValid = false;
 
     do {
-        cout << "Entrer la map a solutionner (ex: Expert25) : ";
+        cout << "Entrer la map a solutionner (ex: Expert25) : ";    // Demandes à l'utilisateur le nom d'un fichier de map
         cin >> userInput;
         ifstream file("map" + userInput + ".txt");
         if (file.is_open()) {
@@ -165,10 +176,12 @@ void camouflage::readFile() {
     else
         cout << "Fichier : " << solutionFileName << " innexistant";
 
-    cout << "Contenu original de la planche du fichier: " << endl << _mapPlanche << endl;
-    cout << "Contenu de la planche de solution:" << endl << _mapSolution << endl;
+    for (int i = 0; i < 4; i++)     // initialise la map solution
+        for (int j = 0; j < 4; j++)
+            _mapSolution.at(i, j) = "\0";
 }
 
+// prints dans le fichier la map et la solution
 void camouflage::printFile() {
     string solutionFileName = _mapPlanche.getName();
     ofstream solutionFile("solution" + solutionFileName + ".txt");
@@ -177,4 +190,10 @@ void camouflage::printFile() {
     solutionFile << _mapPlanche << endl;
     solutionFile << "Une solution a été trouvee:" << endl;
     solutionFile << _mapSolution << endl;
+}
+
+// prints sur l'écran la map et la solution
+void camouflage::printScreen() {
+    cout << "Pour la map suivante: " << _mapPlanche.getName() << endl << _mapPlanche << endl
+        << "Une solution a été trouvee:" << endl << _mapSolution << endl;
 }
