@@ -1,3 +1,9 @@
+/*
+ * Auteur:		Camélia Groleau
+ * Date:		23/09/2020
+ * Fichier:		piece.cpp
+ * Description:	Fonctions en lien avec les pièces du jeu Camouflage
+ */
 #include "piece.h"
 
 piece::piece()

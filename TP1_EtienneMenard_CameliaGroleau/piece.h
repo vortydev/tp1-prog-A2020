@@ -1,3 +1,9 @@
+/*
+ * Auteur:		Camélia Groleau
+ * Date:		23/09/2020
+ * Fichier:		piece.h
+ * Description:	Classe permettant de stocker les valeurs et méthodes reliées aux pièces du jeu Camouflage
+ */
 #pragma once
 
 struct casePiece		//Correspond à une partie de la pièce
