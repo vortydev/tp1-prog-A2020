@@ -12,8 +12,6 @@
 #include "vecteur.hpp"
 #include "map.hpp"
 #include "piece.h"
-#include "piece2Cases.h"
-#include "piece3Cases.h"
 using namespace std;
 
 class camouflage
