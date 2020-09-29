@@ -12,6 +12,8 @@
 #include "vecteur.hpp"
 #include "map.hpp"
 #include "piece.h"
+#include "piece2Cases.h"
+#include "piece3Cases.h"
 using namespace std;
 
 class camouflage
@@ -22,7 +24,7 @@ class camouflage
 		vecteur<piece> _pieces = vecteur<piece>(6);
 
 	public:
-		void init();												// initialise les composants du jeu
+		void init();												//initialise les composants du jeu
 		bool findSolution(int indexPiece = 0);						//le brut force récursif
 		bool verifPiece(int indexPiece, int ligne, int col);		//vérifie si la position de la pièce peut correspondre
 

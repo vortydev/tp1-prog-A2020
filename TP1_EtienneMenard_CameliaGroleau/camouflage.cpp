@@ -28,24 +28,50 @@ bool camouflage::findSolution(int indexPiece)
 {
     if (indexPiece == 6)
         return true;
-    for (int ligne = 0; ligne < 3; ligne++)
+    if (indexPiece != 3 && indexPiece != 4)
     {
-        for (int col = 0; col < 3; col++)
+        for (int ligne = 0; ligne < 3; ligne++)
         {
-            for (int rotation = 0; rotation < 4; rotation++)
+            for (int col = 0; col < 3; col++)
             {
-                if (verifPiece(indexPiece, ligne, col))
+                for (int rotation = 0; rotation < 4; rotation++)
                 {
-                    cout << "Piece " << indexPiece << " ajoutee\n" << _mapSolution;
-                    if (findSolution(indexPiece + 1))
+                    if (verifPiece(indexPiece, ligne, col))
                     {
-                        return true;
+                        cout << "Piece " << indexPiece << " ajoutee\n" << _mapSolution;
+                        if (findSolution(indexPiece + 1))
+                        {
+                            return true;
+                        }
+                        removePiece(indexPiece, ligne, col);
+                        cout << "Piece " << indexPiece << " retiree\n" << _mapSolution;
                     }
-                    removePiece(indexPiece, ligne, col);
-                    cout << "Piece " << indexPiece << " retiree\n" << _mapSolution;
+                    _pieces[indexPiece].rotateClockwise();
                 }
-                _pieces[indexPiece].rotateClockwise();
             }
+        }
+    }
+    else
+    {
+        for (int rotation = 0; rotation < 4; rotation++)
+        {
+            for (int ligne = ((rotation == 2) ? -1 : 0); ligne < ((rotation == 0) ? 4 : 3); ligne++)
+            {
+                for (int col = ((rotation == 1) ? -1 : 0); col < ((rotation == 3) ? 4 : 3); col++)
+                {
+                    if (verifPiece(indexPiece, ligne, col))
+                    {
+                        cout << "Piece " << indexPiece << " ajoutee\n" << _mapSolution;
+                        if (findSolution(indexPiece + 1))
+                        {
+                            return true;
+                        }
+                        removePiece(indexPiece, ligne, col);
+                        cout << "Piece " << indexPiece << " retiree\n" << _mapSolution;
+                    }
+                }
+            }
+            _pieces[indexPiece].rotateClockwise();
         }
     }
     return false;
@@ -53,9 +79,9 @@ bool camouflage::findSolution(int indexPiece)
 
 bool camouflage::verifPiece(int indexPiece, int ligne, int col)
 {
-    for (int xPos = 0; xPos < 2; xPos++)
+    for (int xPos = (ligne == -1) ? 1 : 0; xPos < 2; xPos++)
     {
-        for (int yPos = 0; yPos < 2; yPos++)
+        for (int yPos = (col == -1) ? 1 : 0; yPos < 2; yPos++)
         {
             if (!_pieces[indexPiece].emptyAt(xPos, yPos))
             {
