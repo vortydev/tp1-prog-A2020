@@ -17,9 +17,9 @@ using namespace std;
 class camouflage
 {
 	private:
-		map<char> _mapPlanche;
-		map<string> _mapSolution;
-		vecteur<piece> _pieces = vecteur<piece>(6);
+		map<char> _mapPlanche;										//stocke la planche de jeu
+		map<string> _mapSolution;									//stocke la solution
+		vecteur<piece> _pieces = vecteur<piece>(6);					//stocke les pièces
 
 	public:
 		void init();												//initialise les composants du jeu
