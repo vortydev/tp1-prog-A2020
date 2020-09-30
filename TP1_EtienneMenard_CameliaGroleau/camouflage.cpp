@@ -25,9 +25,18 @@ void camouflage::initPieces() {
 
 // core loop de l'exécution du jeu
 void camouflage::game() {
-    findSolution();
-    printFile();
-    printScreen();
+    char replay;
+    do {
+        system("cls");
+
+        init();
+        findSolution();
+        printFile();
+        printScreen();
+        
+        cout << endl << "Voulez-vous rejouer? (o/n) : ";
+        cin >> replay;
+    } while (replay != 'n');
 }
 
 // brute force la solution du puzzle
@@ -146,7 +155,10 @@ void camouflage::readFile() {
         if (file.is_open()) {
             isValid = true;
             file.close();
-        }   
+        }
+        else {
+            cout << "map" + userInput + ".txt n'existe pas." << endl << endl;
+        }
     } while (!isValid);
 
     plancheFileName = "map" + userInput + ".txt";
